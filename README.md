@@ -1,24 +1,47 @@
-# README
+## users table
+|Column|Type|Option|
+|------|----|------|
+|nickname|string|null: false|
+|e-mail|string|null: false|
+|password|string|null: false|
+|family-name|string|null: false|
+|last-name|string|null: false|
+|birthday|string|null: false|
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Assosiation
+- has_many :items
+- has_many :orders
 
-Things you may want to cover:
 
-* Ruby version
+# items table
+|Column|Type|Option|
+|------|----|------|
+|user-id|string|null: false, foreign_key: true|
+|price|integer|null: false|
+|content|string|null: false|
+<!-- |content|string| -->
+|name|string|null: false|
+|description|string|null: false|
+|category|string|null: false|
+|delivery|string|null: false|
 
-* System dependencies
+### Assosiation
+- belong_to : users
+- has_one : orders
 
-* Configuration
+# order table
+|Column|Type|Option|
+|------|----|------|
+|user-id|references|null: false, foreign_key: true|
+|item-id|references|null: false, foreign_key: true|
+|address|string|null: false|
 
-* Database creation
 
-* Database initialization
+### Assosiation
+belongs_to : users
+belongs_to : items
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+<!-- # sample4 table
+|Column|Type|Option|
+|------|----|------|
+|text|string|null: false| -->
