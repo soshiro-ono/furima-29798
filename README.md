@@ -21,20 +21,19 @@
 |Column|Type|Option|
 |------|----|------|
 |user_id|string|null: false, foreign_key: true|
-|image|text|null: false|
 |name|string|null: false|
 |description|text|null: false|
-|category_id|string|null: false|
-|status_id|string|null: false|
-|delivery_charge_id|string|null: false|
-|area_id|string|null: false|
-|days_id|string|null: false|
+|category_id|integer|null: false|
+|status_id|integer|null: false|
+|delivery_charge_id|integer|null: false|
+|area_id|integer|null: false|
+|days_id|integer|null: false|
 |price|integer|null: false|
 
 
 ### Assosiation
-- belong_to : users
-- has_one : orders
+- belong_to : user
+- has_one : order
 
 
 
@@ -42,7 +41,7 @@
 
 
 
-# order table
+# orders table
 |Column|Type|Option|
 |------|----|------|
 |user|references|null: false, foreign_key: true|
@@ -50,9 +49,9 @@
 
 
 ### Assosiation
-belongs_to : users
-belongs_to : items
-has_one : addresses
+belongs_to : user
+belongs_to : item
+has_one : address
 
 
 
@@ -63,11 +62,11 @@ has_one : addresses
 |------|----|------|
 |order|references|null: false, foreign_key: true|
 |postal_code|string|null: false|
-|prefectures_id|string|null: false|
+|prefectures_id|integer|null: false|
 |municipality|string|null: false|
 |address|string|null: false|
 |building|string|
-|phone|integer|null: false|a
+|phone|string|null: false|
 
 ### Assosiation
 belongs_to : order
