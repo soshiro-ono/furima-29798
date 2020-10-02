@@ -11,7 +11,6 @@ class User < ApplicationRecord
     validates :family_katakana,format: {with:/\A[ァ-ヶー－]+\z/, message:"全角カタカナで入力してください"}
     validates :last_katakana,format: {with:/\A[ァ-ヶー－]+\z/, message:"全角カタカナで入力してください"}
     validates :password,format: {with:/\A[a-zA-Z0-9]+\z/,length:{minimum:6}, message:"パスワードは6文字以上で半角英数字混合で入力してください"}
-    validates :password_confirmation,format: {with:/\A[a-zA-Z0-9]+\z/,length:{minimum:6}, message:"パスワードは6文字以上で半角英数字混合で入力してください"}
     validates :birthday
   end
 end

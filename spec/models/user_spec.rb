@@ -24,6 +24,10 @@ describe User do
         @user.password_confirmation = "7749os"
         expect(@user).to be_valid
       end
+      it "メールアドレスは@を含んでいれば登録できる"do
+        @user.email = ooo@kkk
+        expect(@user).to be_valid
+      end
     end
 
 
