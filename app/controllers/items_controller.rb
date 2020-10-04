@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   def index
-    @items = Item.order("created_at DESC")
+    @items = Item.all.order("created_at DESC")
   end
 
   def new
@@ -14,6 +14,18 @@ class ItemsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def input
+    post = Post.find(params[:id])
+    if post.input
+      post.update(input: false)
+    else
+      post.update(input: true)
+    end
+
+    item = Post.find(params[:id])
+    render json: { post: item }
   end
 
   private
