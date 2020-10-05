@@ -8,7 +8,7 @@ class Item < ApplicationRecord
   belongs_to_active_hash :area
   belongs_to_active_hash :days
 
-  validates :name, :description, :category_id,:status_id,:delivery_charge_id,:area_id,:days_id, presence: true
+  validates :name, :description, :category_id,:status_id,:delivery_charge_id,:area_id,:days_id,:price, presence: true
 
   validates :category_id,:status_id,:delivery_charge_id,:area_id,:days_id, numericality: { other_than: 1 } 
 
