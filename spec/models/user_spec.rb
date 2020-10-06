@@ -9,12 +9,12 @@ describe User do
       it "nickname、email、password、password_confirmation、family_name、last_name、family_katakana、last_katakana、birth_dayが存在すれば登録できる" do
         expect(@user).to be_valid
       end
-      it "family_nameとlast_nameが全角あれば登録できる" do
+      it "family_nameとlast_nameが全角であれば登録できる" do
         @user.family_name = "小野"
         @user.last_name = "太郎"
         expect(@user).to be_valid
       end
-      it "family_katakanaとlast_katakanaが全角カタカナあれば登録できる" do
+      it "family_katakanaとlast_katakanaが全角カタカナであれば登録できる" do
         @user.family_katakana = "オノ"
         @user.last_katakana = "タロウ"
         expect(@user).to be_valid
