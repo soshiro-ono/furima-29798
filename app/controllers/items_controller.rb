@@ -1,5 +1,4 @@
 class ItemsController < ApplicationController
-  # before_action :move_to_index, except: [:index]
   before_action :authenticate_user!,except: [:index]
 
   def index
@@ -16,9 +15,7 @@ class ItemsController < ApplicationController
     if @item.save
       redirect_to root_path
     else
-      # redirect_to new_item_path
       render :new
-      # このrenderの意味は？
     end
   end
 
