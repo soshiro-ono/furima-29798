@@ -12,4 +12,4 @@ FactoryBot.define do
   end
 end
 
-# birthdayはどうやって値を入力すればいい？
+# birthdayは数字で入力する
