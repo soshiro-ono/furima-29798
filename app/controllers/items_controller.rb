@@ -13,6 +13,9 @@ class ItemsController < ApplicationController
     # @item = Item.find(item_params)これだとどの情報を持ってきていいのか分からなくてエラーになる。params[:id]にはPrefixで指定したパスであるitem_path(item.id)のitem.idにあたる数字。クリックしたitem.idが@itemに入る
     @item = Item.find(params[:id])
   end
+
+  def edit
+  end
   
 
   def create
