@@ -8,6 +8,11 @@ class ItemsController < ApplicationController
   def new
     @item = Item.new
   end
+
+  def show
+    # @item = Item.find(item_params)これだとどの情報を持ってきていいのか分からなくてエラーになる。params[:id]にはPrefixで指定したパスであるitem_path(item.id)のitem.idにあたる数字。クリックしたitem.idが@itemに入る
+    @item = Item.find(params[:id])
+  end
   
 
   def create
