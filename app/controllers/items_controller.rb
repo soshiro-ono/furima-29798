@@ -15,10 +15,25 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    @item = Item.find(params[:id])
+  end
+
+  def update
+    # ＠マークは必要なのか。いるならどんなとき？
+    # renderでeditを指定しているから必要。このeditは@itemを使っている。データが保存できればitemで何の問題もないが登録できなかった時の処理であるrender :editを使うために必要。pictweetではエラーハンドリングつまりrenderを使っていないため＠は必要なかった。ちなみにrenderではなくredirect_toを使っている場合も＠はいらない
+    @item = Item.find(params[:id])
+    @item.update(item_params)
+    if @item.save
+      redirect_to root_path
+    else
+      render :edit
+    end
   end
   
 
   def create
+    # よくよく考えるとなぜここが@がいるのかわからない。createのhtmlがあるわけではないのに。＠なしでも登録できてしまった。なぜ必要なのか
+    # renderでnewを指定しているから必要。このnewは@itemを使っている。データが保存できればitemで何の問題もないが登録できなかった時の処理であるrender :newを使うために必要。pictweetではエラーハンドリングつまりrenderを使っていないため＠は必要なかった。ちなみにrenderではなくredirect_toを使っている場合も＠はいらない
     @item = Item.new(item_params)
     if @item.save
       redirect_to root_path
