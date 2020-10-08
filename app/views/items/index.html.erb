@@ -123,13 +123,14 @@
   <%# 商品一覧 %>
   <div class='item-contents'>
     <h2 class='title'>ピックアップカテゴリー</h2>
-    <%= link_to '新規投稿商品', "#", class: "subtitle" %>
+    <%= link_to '新規投稿商品', new_item_path, class: "subtitle" %>
     <ul class='item-lists'>
 
         <%# 商品のインスタンス変数になにか入っている場合、中身のすべてを展開できるようにしましょう %>
       <% @items.each do |item| %>
         <li class='list'>
-          <%= link_to "#" do %>
+          <%= link_to item_path(item.id) do %>
+          <%# ”詳細”とかないときはpathをすぐに指定する。　Prefixを用いる場合は、この商品のIDはitem_path(item.id)のようにPrefixの引数として渡すようにする %>
             <div class='item-img-content'>
               <%= image_tag item.image, class: "item-img" if item.image.attached?%>
             </div>
@@ -189,3 +190,9 @@
   </a>
 </div>
 <%= render "shared/footer" %>
+
+
+
+
+
+
