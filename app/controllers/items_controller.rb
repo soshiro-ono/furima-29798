@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: [:edit, :show]  
+  before_action :set_item, only: [:edit, :show, :update]  
   before_action :authenticate_user!,except: [:index,:show]
 
   def index
@@ -19,7 +19,6 @@ class ItemsController < ApplicationController
   def update
     # ＠マークは必要なのか。いるならどんなとき？
     # renderでeditを指定しているから必要。このeditは@itemを使っている。データが更新できればitemで何の問題もないが登録できなかった時の処理であるrender :editを使うために必要。pictweetではエラーハンドリングつまりrenderを使っていないため＠は必要なかった。ちなみにrenderではなくredirect_toを使っている場合も＠はいらない
-    @item = Item.find(params[:id])
     if @item.update(item_params)
       redirect_to root_path
     else
