@@ -54,7 +54,7 @@ class ItemsController < ApplicationController
   end
 
   def set_item
-    @item = Item.find(params[:id])#edit showの処理をまとめている。例えばshowアクションが動いた時にset_itemが読み込まれるイメージ。
+    @item = Item.find(params[:id])#edit show destoroyの処理をまとめている。例えばshowアクションが動いた時にset_itemが読み込まれるイメージ。
     # @item = Item.find(item_params)これだとどの情報を持ってきていいのか分からなくてエラーになる。params[:id]にはPrefixで指定したパスであるitem_path(item.id)のitem.idにあたる数字。クリックしたitem.idが@itemに入る
   end
 end
