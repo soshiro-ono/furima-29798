@@ -21,7 +21,6 @@ class ItemsController < ApplicationController
       redirect_to root_path
     else
       redirect_to item_path(@item.id)
-      # ここは別に＠なくても良いのでは？redirect_toのときは必要なかった気がする
     end
   end
 
