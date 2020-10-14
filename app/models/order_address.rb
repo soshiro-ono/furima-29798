@@ -12,9 +12,9 @@ class OrderAddress
   end
 
   validates :prefectures_id, numericality: { other_than: 1 } 
-  validates :postal_code, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)"}
+  validates :postal_code, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "郵便番号にはハイフンが必要です"}
   # 郵便番号にはハイフンが必要であること（123-4567となる）
-  validates :phone, format: {with: /\A\d{10,11}\z/, message: "ハイフンは不要で、11桁以内にしてください"}
+  validates :phone, format: {with: /\A\d{10,11}\z/, message: "ハイフンは不要で、半角数字11桁以内にしてください"}
   # 電話番号にはハイフンは不要で、11桁以内であること
 
   def save
