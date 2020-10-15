@@ -39,7 +39,7 @@ class OrdersController < ApplicationController
   end
 
   def pay_item
-    Payjp.api_key = "sk_test_15d1bc4a41863e6a7dd762f5"  # 自身のPAY.JPテスト秘密鍵を記述しましょう
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]  # 自身のPAY.JPテスト秘密鍵を記述しましょう→環境変数にする
     Payjp::Charge.create(
       amount: @item.price,  # 商品の値段がないから決済できない？だとするとorder_paramsにitemの情報が必要？
       card: order_params[:token],    # カードトークンここの書き方がおかしい？
