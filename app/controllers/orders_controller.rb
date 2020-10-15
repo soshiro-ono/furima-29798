@@ -1,13 +1,11 @@
 class OrdersController < ApplicationController
-  before_action :move_to_index
   before_action :authenticate_user!
+  before_action :set_order, only: [:index, :create]  
+  before_action :move_to_index
   # この記述でログインしていないユーザーは直接購入ページにきてもログインページに飛ばす
-  # if @item.order.present?
-  # @order = Order.find(params[:order_id])
-  # if @order.present?これはダメ七日
+
 
   def index
-    @item = Item.find(params[:item_id])
     @order_address = OrderAddress.new
     if @item.order.present?
       redirect_to root_path
@@ -18,7 +16,6 @@ class OrdersController < ApplicationController
 
 
   def create
-    @item = Item.find(params[:item_id])
     @order_address = OrderAddress.new(order_params)
     if @order_address.valid?
       # @order_address.valid?とはどういう意味？
@@ -41,8 +38,8 @@ class OrdersController < ApplicationController
   def pay_item
     Payjp.api_key = ENV["PAYJP_SECRET_KEY"]  # 自身のPAY.JPテスト秘密鍵を記述しましょう→環境変数にする
     Payjp::Charge.create(
-      amount: @item.price,  # 商品の値段がないから決済できない？だとするとorder_paramsにitemの情報が必要？
-      card: order_params[:token],    # カードトークンここの書き方がおかしい？
+      amount: @item.price,  # 商品の値段がないから決済できない
+      card: order_params[:token],    # カードトークン
       currency: 'jpy'               # 通貨の種類（日本円）
     )
   end
@@ -54,6 +51,9 @@ class OrdersController < ApplicationController
     end
   end
   # 出品者が購入ページに行こうとするとindexに戻す
+  def set_order
+    @item = Item.find(params[:item_id])
+  end
 end
 
 
