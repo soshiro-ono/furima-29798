@@ -62,12 +62,17 @@ has_one : address
 |------|----|------|
 |order|references|null: false, foreign_key: true|
 |postal_code|string|null: false|
+<!-- 郵便番号 -->
 |prefectures_id|integer|null: false|
+<!-- 都道府県 -->
 |municipality|string|null: false|
+<!-- 市区町村 -->
 |address|string|null: false|
+<!-- 番地 -->
 |building|string|
+<!-- 建物名 -->
 |phone|string|null: false|
-
+<!-- 電話番号 -->
 ### Assosiation
 belongs_to : order
 
