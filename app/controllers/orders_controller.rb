@@ -30,7 +30,7 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    # .require(:order_address)を追加した
+    # .require(:order_address)を追加した。order index.htmlのformwithでモデルを指定したため
     params.require(:order_address).permit(:item_id, :postal_code, :prefectures_id, :municipality, :address, :building, :phone, :token).merge(user_id: current_user.id,item_id: params[:item_id],token: params[:token])
     # なぜmerge(user_id: current_user.id)にするのか。OrderAddressのattr_accessorでuser_idを読み込むことができるようにしている。paramsの中身に含まれてないものはマージで送るらしい
   end

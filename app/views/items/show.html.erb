@@ -8,13 +8,12 @@
     </h2>
     <div class='item-img-content'>
       <%= image_tag @item.image ,class:"item-box-img" %>
-      <%# 商品が売れている場合は、sold outを表示しましょう %>
+      <%# orderにデータが保存されていれば購入している状態という意味 %>
       <% if @item.order.present? %>
         <div class='sold-out'>
           <span>Sold Out!!</span>
         </div>
       <% end %>
-      <%# //商品が売れている場合は、sold outを表示しましょう %>
     </div>
     <div class="item-price-box">
       <span class="item-price">
@@ -25,8 +24,8 @@
       </span>
     </div>
 
-    <%# ログインしているユーザーと出品しているユーザーが、同一人物の場合と同一人物ではない場合で、処理を分けましょう %>
-    <%#  userとcurrentuseridが同じ時表示そうでなければ表示しないにする%>
+    
+    <%#  userとcurrentuseridが同じ時表示。そうでなければ表示しないにする%>
     <% if user_signed_in? %>
       <% if @item.user_id == current_user.id %>
         <%= link_to '商品の編集', edit_item_path, method: :get, class: "item-red-btn" %>
@@ -35,14 +34,13 @@
       <% end %>
 
       <% unless @item.user_id == current_user.id %>
-        <%# 商品が売れていない場合はこちらを表示しましょう %>
+        <%# 商品が売れていない場合は表示する %>
         <% unless @item.order.present? %>
           <%= link_to '購入画面に進む', item_orders_path(@item.id), method: :get,class:"item-red-btn" %>
         <% end %>
-        <%# //商品が売れていない場合はこちらを表示しましょう %>
       <% end %>
     <% end %>
-    <%# //ログインしているユーザーと出品しているユーザーが、同一人物の場合と同一人物ではない場合で、処理を分けましょう %>
+    
     <div class="item-explain-box">
       <span><%= @item.description %></span>
     </div>
