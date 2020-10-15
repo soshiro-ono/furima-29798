@@ -1,11 +1,19 @@
 class OrdersController < ApplicationController
-  # before_action :move_to_index
+  before_action :move_to_index
   before_action :authenticate_user!
   # この記述でログインしていないユーザーは直接購入ページにきてもログインページに飛ばす
+  # if @item.order.present?
+  # @order = Order.find(params[:order_id])
+  # if @order.present?これはダメ七日
 
   def index
     @item = Item.find(params[:item_id])
-    @order_address = OrderAddress.new   
+    @order_address = OrderAddress.new
+    if @item.order.present?
+      redirect_to root_path
+    end
+    # この@order_addressはエラーハンドリングで使うために必要
+    # ここでいうindexは購入画面
   end
 
 
@@ -13,9 +21,10 @@ class OrdersController < ApplicationController
     @item = Item.find(params[:item_id])
     @order_address = OrderAddress.new(order_params)
     if @order_address.valid?
+      # @order_address.valid?とはどういう意味？
       pay_item
       @order_address.save
-      redirect_to root_path
+      return redirect_to root_path
     else
       render action: :index
     end
@@ -24,7 +33,8 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.permit(:item_id, :postal_code, :prefectures_id, :municipality, :address, :building, :phone, :token).merge(user_id: current_user.id)
+    # .require(:order_address)を追加した
+    params.require(:order_address).permit(:item_id, :postal_code, :prefectures_id, :municipality, :address, :building, :phone, :token).merge(user_id: current_user.id,item_id: params[:item_id],token: params[:token])
     # なぜmerge(user_id: current_user.id)にするのか。OrderAddressのattr_accessorでuser_idを読み込むことができるようにしている。paramsの中身に含まれてないものはマージで送るらしい
   end
 
@@ -37,14 +47,14 @@ class OrdersController < ApplicationController
     )
   end
 
-  # def move_to_index
-  #   if user_id == current_user.id
-  #     redirect_to root_path
-  #   end
-  # end
+  def move_to_index
+    @item = Item.find(params[:item_id])
+    if @item.user_id == current_user.id
+      redirect_to root_path
+    end
+  end
   # 出品者が購入ページに行こうとするとindexに戻す
 end
 
-# なぜorderとaddressでテーブルをわけたのか？
-# 分けなくてもできることはできるらしいが分けた方がわかりやすいらしい
+
 

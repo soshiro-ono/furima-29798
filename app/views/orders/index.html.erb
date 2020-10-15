@@ -30,7 +30,7 @@
       </p>
     </div>
     <%# /支払額の表示 %>
-
+    <%# モデルは要らないと言われたあってもなくてもいけるらしいその場合はコントローラーの記述が変わる。requierでorder_addressを指定してマージしておくらなければならない %>
     <%= form_with model: @order_address, url: item_orders_path,id: 'charge-form', class: 'transaction-form-wrap',local: true do |f| %>
     <%= render 'shared/error_messages',model: f.object %>
     <%# カード情報の入力 %>

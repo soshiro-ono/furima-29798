@@ -133,6 +133,15 @@
           <%# ”詳細”とかないときはpathをすぐに指定する。　Prefixを用いる場合は、この商品のIDはitem_path(item.id)のようにPrefixの引数として渡すようにする %>
             <div class='item-img-content'>
               <%= image_tag item.image, class: "item-img" if item.image.attached?%>
+
+              <%# 商品が売れていればsold outを表示しましょう %>
+              <% if item.order.present? %>
+                <div class='sold-out'>
+                  <span>Sold Out!!</span>
+                </div>
+              <% end %>
+              <%# //商品が売れていればsold outを表示しましょう %>
+              
             </div>
             <div class='item-info'>
               <h3 class='item-name'>
@@ -148,12 +157,7 @@
           <% end %>
         </li>
       <% end %>
-            <%# 商品が売れていればsold outを表示しましょう %>
-            <%# <div class='sold-out'>
-              <span>Sold Out!!</span>
-            </div> %>
-            <%# //商品が売れていればsold outを表示しましょう %>
-
+            
       <%# //商品のインスタンス変数になにか入っている場合、中身のすべてを展開できるようにしましょう %>
 
       <%# 商品がない場合のダミー %>
